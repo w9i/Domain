@@ -10,5 +10,5 @@ import Common
 
 public protocol UseCase {
     @discardableResult
-    func start() -> Cancellable?
+    public func start() -> Cancellable?
 }

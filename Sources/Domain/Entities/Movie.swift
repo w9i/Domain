@@ -8,21 +8,21 @@
 import Foundation
 
 public struct Movie: Equatable, Identifiable {
-    typealias Identifier = String
-    enum Genre {
+    public typealias Identifier = String
+    public enum Genre {
         case adventure
         case scienceFiction
     }
-    let id: Identifier
-    let title: String?
-    let genre: Genre?
-    let posterPath: String?
-    let overview: String?
-    let releaseDate: Date?
+    public let id: Identifier
+    public let title: String?
+    public let genre: Genre?
+    public let posterPath: String?
+    public let overview: String?
+    public let releaseDate: Date?
 }
 
 public struct MoviesPage: Equatable {
-    let page: Int
-    let totalPages: Int
-    let movies: [Movie]
+    public let page: Int
+    public let totalPages: Int
+    public let movies: [Movie]
 }

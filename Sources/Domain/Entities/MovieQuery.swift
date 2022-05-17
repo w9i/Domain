@@ -8,5 +8,5 @@
 import Foundation
 
 public struct MovieQuery: Equatable {
-    let query: String
+    public let query: String
 }
