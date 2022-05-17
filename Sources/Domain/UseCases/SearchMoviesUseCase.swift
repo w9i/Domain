@@ -8,7 +8,7 @@
 import Foundation
 import Common
 
-public protocol SearchMoviesUseCase {
+protocol SearchMoviesUseCase {
     func execute(requestValue: SearchMoviesUseCaseRequestValue,
                  cached: @escaping (MoviesPage) -> Void,
                  completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable?
