@@ -11,14 +11,14 @@ import Common
 // This is another option to create Use Case using more generic way
 public final class FetchRecentMovieQueriesUseCase: UseCase {
 
-    struct RequestValue {
+    public struct RequestValue {
         let maxCount: Int
     }
-    typealias ResultValue = (Result<[MovieQuery], Error>)
+    public typealias ResultValue = (Result<[MovieQuery], Error>)
 
-    private let requestValue: RequestValue
-    private let completion: (ResultValue) -> Void
-    private let moviesQueriesRepository: MoviesQueriesRepository
+    public  let requestValue: RequestValue
+    public  let completion: (ResultValue) -> Void
+    public  let moviesQueriesRepository: MoviesQueriesRepository
 
     init(requestValue: RequestValue,
          completion: @escaping (ResultValue) -> Void,
