@@ -12,7 +12,7 @@ import Common
 public final class FetchRecentMovieQueriesUseCase: UseCase {
 
     public struct RequestValue {
-        let maxCount: Int
+        public let maxCount: Int
     }
     public typealias ResultValue = (Result<[MovieQuery], Error>)
 
