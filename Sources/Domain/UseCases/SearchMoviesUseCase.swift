@@ -8,13 +8,13 @@
 import Foundation
 import Common
 
-protocol SearchMoviesUseCase {
+public protocol SearchMoviesUseCase {
     func execute(requestValue: SearchMoviesUseCaseRequestValue,
                  cached: @escaping (MoviesPage) -> Void,
                  completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable?
 }
 
-final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
+public final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
 
     private let moviesRepository: MoviesRepository
     private let moviesQueriesRepository: MoviesQueriesRepository

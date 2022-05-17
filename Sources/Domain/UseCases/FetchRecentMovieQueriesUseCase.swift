@@ -9,7 +9,7 @@ import Foundation
 import Common
 
 // This is another option to create Use Case using more generic way
-final class FetchRecentMovieQueriesUseCase: UseCase {
+public final class FetchRecentMovieQueriesUseCase: UseCase {
 
     struct RequestValue {
         let maxCount: Int
