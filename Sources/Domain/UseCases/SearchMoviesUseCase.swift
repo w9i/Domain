@@ -8,43 +8,43 @@
 import Foundation
 import Common
 
-protocol SearchMoviesUseCase {
+public protocol SearchMoviesUseCase {
     func execute(requestValue: SearchMoviesUseCaseRequestValue,
-                 cached: @escaping (MoviesPage) -> Void,
                  completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable?
 }
 
-public final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
+public class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
 
-    private let moviesRepository: MoviesRepository
-    private let moviesQueriesRepository: MoviesQueriesRepository
-
-    init(moviesRepository: MoviesRepository,
-         moviesQueriesRepository: MoviesQueriesRepository) {
-
+    let moviesRepository: MoviesRepository
+    let moviesQueriesRepository: MoviesQueriesRepository
+    
+    public init(moviesRepository: MoviesRepository, moviesQueriesRepository: MoviesQueriesRepository) {
         self.moviesRepository = moviesRepository
         self.moviesQueriesRepository = moviesQueriesRepository
     }
-
-    func execute(requestValue: SearchMoviesUseCaseRequestValue,
-                 cached: @escaping (MoviesPage) -> Void,
+    
+    public func execute(requestValue: SearchMoviesUseCaseRequestValue,
                  completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable? {
-
-        return moviesRepository.fetchMoviesList(query: requestValue.query,
-                                                page: requestValue.page,
-                                                cached: cached,
-                                                completion: { result in
-
-            if case .success = result {
-                self.moviesQueriesRepository.saveRecentQuery(query: requestValue.query) { _ in }
+        return moviesRepository.moviesList(query: requestValue.query, page: requestValue.page) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success:
+                strongSelf.moviesQueriesRepository.saveRecentQuery(query: requestValue.query)
+                return completion(result)
+            case .failure:
+                return completion(result)
             }
-
-            completion(result)
-        })
+        }
     }
 }
 
-struct SearchMoviesUseCaseRequestValue {
+public struct SearchMoviesUseCaseRequestValue {
     let query: MovieQuery
     let page: Int
+    
+    public init(query: MovieQuery, page: Int) {
+        self.query = query
+        self.page = page
+    }
 }

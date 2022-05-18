@@ -7,6 +7,16 @@
 
 import Foundation
 
-public struct MovieQuery: Equatable {
+public struct MovieQuery {
     public let query: String
+    
+    public init(query: String) {
+        self.query = query
+    }
+}
+
+extension MovieQuery: Equatable {
+    public static func == (lhs: MovieQuery, rhs: MovieQuery) -> Bool {
+        return (lhs.query == rhs.query)
+    }
 }
