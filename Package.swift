@@ -14,7 +14,7 @@ let package = Package(
             targets: ["Domain"]),
     ],
     dependencies: [
-        .package(name: "Common", path: "https://github.com/w9i/Common")
+        .package(name: "Common", url: "https://github.com/w9i/Common", from: "1.0.0")
     ],
     targets: [
         .target(
